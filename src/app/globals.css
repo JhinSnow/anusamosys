@@ -1,0 +1,173 @@
+@import "tailwindcss";
+
+/*
+ * Anusamosys design tokens
+ * ------------------------------------------------------------------
+ * Committed light theme — staff use this standing at a bright, daylit
+ * check-in desk, glancing at a tablet between greetings. High ambient
+ * light + fast scanning of a 96-name list rules out dark mode here; the
+ * brand's identity lives in the indigo primary + gold accent, not the
+ * surface (surface stays a true near-white, per Restrained strategy).
+ * All colors OKLCH. One saturated moment is reserved for the leaderboard.
+ */
+
+:root {
+  /* Surfaces */
+  --color-bg: oklch(1 0 0);
+  --color-surface: oklch(0.965 0.006 268.5);
+  --color-surface-2: oklch(0.94 0.008 268.5);
+  --color-border: oklch(0.88 0.008 268.5);
+  --color-border-strong: oklch(0.78 0.01 268.5);
+
+  /* Text */
+  --color-ink: oklch(0.19 0.014 268.5);
+  --color-muted: oklch(0.44 0.014 268.5);
+
+  /* Brand */
+  --color-primary: oklch(0.5 0.17 268.5);
+  --color-primary-strong: oklch(0.42 0.17 268.5);
+  --color-primary-subtle: oklch(0.94 0.03 268.5);
+  --color-primary-ink: oklch(1 0 0);
+
+  --color-accent: oklch(0.86 0.14 85);
+  --color-accent-strong: oklch(0.74 0.15 78);
+  --color-accent-subtle: oklch(0.96 0.04 85);
+  --color-accent-ink: oklch(0.22 0.03 85);
+
+  /* Semantic state */
+  --color-success: oklch(0.55 0.14 152);
+  --color-success-subtle: oklch(0.94 0.05 152);
+  --color-success-ink: oklch(1 0 0);
+
+  --color-error: oklch(0.55 0.2 27);
+  --color-error-subtle: oklch(0.95 0.05 27);
+  --color-error-ink: oklch(1 0 0);
+
+  --color-warning: oklch(0.82 0.14 70);
+  --color-warning-subtle: oklch(0.96 0.04 70);
+  --color-warning-ink: oklch(0.22 0.03 70);
+
+  /* Type scale — fixed rem, tight ratio. No fluid clamp(): staff view this
+     at a consistent tablet/laptop DPI, not a marketing viewport. */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-md: 1.125rem;
+  --text-lg: 1.3125rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 1.75rem;
+  --text-3xl: 2.25rem;
+  --text-4xl: 3rem;
+
+  /* Radius */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 1rem;
+  --radius-full: 9999px;
+
+  /* Shadow — used sparingly, for genuinely elevated surfaces only */
+  --shadow-sm: 0 1px 2px oklch(0.19 0.014 268.5 / 0.06);
+  --shadow-md: 0 4px 16px oklch(0.19 0.014 268.5 / 0.1);
+  --shadow-lg: 0 12px 40px oklch(0.19 0.014 268.5 / 0.16);
+
+  /* Semantic z-index scale */
+  --z-dropdown: 10;
+  --z-sticky: 20;
+  --z-modal-backdrop: 30;
+  --z-modal: 40;
+  --z-toast: 50;
+  --z-tooltip: 60;
+
+  /* Motion */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 150ms;
+  --duration-base: 220ms;
+  --duration-slow: 400ms;
+}
+
+@theme inline {
+  --color-bg: var(--color-bg);
+  --color-surface: var(--color-surface);
+  --color-surface-2: var(--color-surface-2);
+  --color-border: var(--color-border);
+  --color-border-strong: var(--color-border-strong);
+  --color-ink: var(--color-ink);
+  --color-muted: var(--color-muted);
+
+  --color-primary: var(--color-primary);
+  --color-primary-strong: var(--color-primary-strong);
+  --color-primary-subtle: var(--color-primary-subtle);
+  --color-primary-ink: var(--color-primary-ink);
+
+  --color-accent: var(--color-accent);
+  --color-accent-strong: var(--color-accent-strong);
+  --color-accent-subtle: var(--color-accent-subtle);
+  --color-accent-ink: var(--color-accent-ink);
+
+  --color-success: var(--color-success);
+  --color-success-subtle: var(--color-success-subtle);
+  --color-success-ink: var(--color-success-ink);
+
+  --color-error: var(--color-error);
+  --color-error-subtle: var(--color-error-subtle);
+  --color-error-ink: var(--color-error-ink);
+
+  --color-warning: var(--color-warning);
+  --color-warning-subtle: var(--color-warning-subtle);
+  --color-warning-ink: var(--color-warning-ink);
+
+  --font-sans: var(--font-ibm-plex-sans-thai);
+  --font-mono: var(--font-geist-mono);
+}
+
+* {
+  border-color: var(--color-border);
+}
+
+html {
+  color-scheme: light;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/*
+ * Leaderboard-only "greenscreen" palette.
+ * ------------------------------------------------------------------
+ * The single scoped exception to the site's committed light theme —
+ * PRODUCT.md explicitly allows the leaderboard to be "the one moment
+ * of delight." A flat, saturated chroma-key green field (like a video
+ * greenscreen backdrop) with white content panels floating on top —
+ * no glow/ambient-light decoration. Everything else stays light.
+ */
+.lb-scope {
+  --lb-bg: oklch(0.68 0.19 148);
+  --lb-surface: oklch(0.99 0.006 148);
+  --lb-border: oklch(0.9 0.01 148);
+  --lb-ink: oklch(0.2 0.02 148);
+  --lb-muted: oklch(0.48 0.02 148);
+  --lb-silver: oklch(0.55 0.008 240);
+  --lb-bronze: oklch(0.5 0.1 45);
+  --lb-card-shadow: 0 8px 24px oklch(0.2 0.05 148 / 0.25);
+}

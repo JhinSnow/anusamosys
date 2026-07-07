@@ -1,0 +1,10 @@
+# Local secrets for `next dev` (via initOpenNextCloudflareForDev) and `wrangler dev`.
+# Generate STAFF_ACCESS_CODE_HASH and SESSION_SECRET with:
+#   npx tsx scripts/generate-secrets.ts "your-access-code"
+# For production, set these as Worker secrets instead: `wrangler secret put <NAME>`.
+
+NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_xxx
+SUPABASE_SERVICE_ROLE_KEY=sb_secret_xxx
+STAFF_ACCESS_CODE_HASH=pbkdf2$210000$...
+SESSION_SECRET=some-random-base64url-string
